@@ -1,0 +1,41 @@
+.add-restaurant-container {
+
+  min-height: 70vh;
+
+  .rw-i {
+    font-family: "RwWidgets" !important;
+  }
+
+  .location-search-container {
+
+    .location-search-input {
+      width: 100%;
+      height: 2.429em;
+      background-color: #fff;
+      border: #ccc 1px solid;
+      border-radius: 4px;
+      padding-left: 15px;
+    }
+  }
+
+  .form_wrap {
+
+
+    .form_row {
+
+
+    }
+
+    .form_buttons {
+      .btn-add {
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+.no-result {
+  width: 100%;
+  background: white;
+  padding: 5rem;
+}

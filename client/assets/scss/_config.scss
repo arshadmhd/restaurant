@@ -1,0 +1,25 @@
+// Base Colors
+$txtCol: #4a4a4a;
+$gray: #003c76;
+//$gray: #999;
+$black: #010000;
+$dark_blue: #003c76;
+$white: #ffffff;
+$green: #1dd38f;
+$orange: #1dd38f;
+//$orange: #f5a637;
+$red: #fe2424;
+$yellow: #BDB76B;
+$backgroundCol: $gray;
+
+@mixin translateY($e) {
+    -webkit-transform: translateY($e);
+    -moz-transform: translateY($e);
+    transform: translateY($e);
+}
+
+@mixin transition($e) {
+    -webkit-transition:$e;
+    -moz-transition:$e;
+    transition:$e;
+}

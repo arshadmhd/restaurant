@@ -1,0 +1,91 @@
+.restaurant-card-container {
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  background: $white;
+
+  .restaurant-image-container {
+    .restaurant-image {
+      width: 100%;
+    }
+  }
+
+  .restaurant-info-container {
+    .restaurant-title {
+      font-weight: 600;
+      font-size: 1.4rem;
+    }
+    .restaurant-class {
+      font-size: 1.2rem;
+      color: #777;
+    }
+    .restaurant-area {
+      font-size: 1.2rem;
+      color: #777;
+    }
+    .restaurant-rate {
+      font-size: 1.2rem;
+      color: #777;
+    }
+    .restaurant-sts {
+      font-weight: 600;
+      font-size: 1.4rem;
+    }
+  }
+}
+
+@media all and (min-width: 960px) {
+  .restaurant-card-container {
+
+    .restaurant-image-container {
+      .restaurant-image {
+      }
+    }
+
+    .restaurant-info-container {
+      .restaurant-title {
+        font-size: 2rem;
+        margin-top: 10px;
+      }
+      .restaurant-class {
+        font-size: 1.8rem;
+        margin-top: 10px;
+      }
+      .restaurant-area {
+        font-size: 1.8rem;
+        margin-top: 10px;
+      }
+      .restaurant-rate {
+        font-size: 1.8rem;
+        margin-top: 10px;
+      }
+      .restaurant-sts {
+        font-size: 1.8rem;
+        margin-top: 10px;
+      }
+    }
+
+  }
+}
+
+@media all and (min-width: 960px) {
+  .arrow-indicator {
+    width: 5rem;
+  }
+}
+
+@media all and (max-width: 959px) and (min-width: 600px) {
+  .arrow-indicator {
+    width: 5rem;
+  }
+}
+
+@media all and (max-width: 599px) and (min-width: 320px) {
+  .arrow-indicator {
+    width: 5rem;
+  }
+}

@@ -1,0 +1,34 @@
+.small-header {
+  color: $gray;
+  font-size: 1.2rem;
+}
+
+.big-timer {
+  color: #003c76;
+  font-size: 1.8rem;
+}
+
+.info-block-container {
+
+  .description  {
+    color: $txtCol;
+    font-size: 1.4rem;
+  }
+}
+
+
+@media all and (min-width: 960px) {
+  .small-header {
+    font-size: 1.5rem;
+  }
+
+}
+
+
+@media all and (max-width: 959px) and (min-width: 600px) {
+
+}
+
+@media all and (max-width: 599px) and (min-width: 320px) {
+
+}

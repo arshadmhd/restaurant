@@ -1,0 +1,1407 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Yet Another Node.js Blog Application API",
+    "description": "Yet Another Node.js Blog Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "APIs for the users in the system."
+    },
+    {
+      "name": "Restaurant",
+      "description": "APIs for the restaurants in the system."
+    },
+    {
+      "name": "Review",
+      "description": "APIs for the reviews in the system."
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/user/signup": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Create new user in system",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "uniqueItems": true,
+                  "example": "test@gmail.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "pass1234"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "name"
+                },
+                "gender": {
+                  "type": "string",
+                  "enum": [
+                    "male",
+                    "female",
+                    "other"
+                  ],
+                  "example": "MALE"
+                },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "USER"
+                  ],
+                  "example": "USER"
+                }
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "New user is created",
+            "schema": {
+              "$ref": "#/definitions/SuccessUserResponse"
+            }
+          },
+          "40x": {
+            "description": "When user creation is failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Login the user",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to login",
+            "schema": {
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "arshad.admin@gmail.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "pass1234"
+                }
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Login successful",
+            "schema": {
+              "$ref": "#/definitions/SuccessUserResponse"
+            }
+          },
+          "40x": {
+            "description": "Login failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/review/{resId}/{reviewId}": {
+      "parameters": [
+        {
+          "name": "resId",
+          "in": "path",
+          "required": true,
+          "description": "ID of the restaurant",
+          "type": "string"
+        },
+        {
+          "name": "reviewId",
+          "in": "path",
+          "required": true,
+          "description": "ID os the review",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Review"
+        ],
+        "description": "List of all reviews",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page number, Default to Zero"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of reviews with page size of 50",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "$ref": "#/definitions/Reviews"
+                }
+              }
+            }
+          },
+          "4xx": {
+            "description": "Fetching failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Review"
+        ],
+        "description": "Create new review in system",
+        "parameters": [
+          {
+            "name": "review",
+            "in": "body",
+            "description": "Review that we want to create",
+            "schema": {
+              "properties": {
+                "rating": {
+                  "type": "string",
+                  "example": "rating"
+                },
+                "comment": {
+                  "type": "string",
+                  "example": "comment"
+                }
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The review is deleted",
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/definitions/Reviews"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "40x": {
+            "description": "When review updation is failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Review"
+        ],
+        "description": "Create new review in system",
+        "parameters": [
+          {
+            "name": "review",
+            "in": "body",
+            "description": "Review that we want to create",
+            "schema": {
+              "properties": {
+                "reply": {
+                  "type": "string",
+                  "example": "reply"
+                }
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The review is deleted",
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/definitions/Reviews"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "40x": {
+            "description": "When review creation is failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Review"
+        ],
+        "description": "Delete review in system",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The review is deleted",
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/definitions/Reviews"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "40x": {
+            "description": "When review deletion is failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/review/{resId}/{reviewId}/reply": {
+      "parameters": [
+        {
+          "name": "resId",
+          "in": "path",
+          "required": true,
+          "description": "ID of the restaurant",
+          "type": "string"
+        },
+        {
+          "name": "reviewId",
+          "in": "path",
+          "required": true,
+          "description": "ID os the review",
+          "type": "string"
+        }
+      ],
+      "put": {
+        "tags": [
+          "Review"
+        ],
+        "description": "Create new reply in system",
+        "parameters": [
+          {
+            "name": "review",
+            "in": "body",
+            "description": "Reply that we want to create",
+            "schema": {
+              "properties": {
+                "reply": {
+                  "type": "string",
+                  "example": "reply"
+                }
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The reply is deleted",
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "properties": {
+                        "reply": {
+                          "type": "string",
+                          "example": "reply"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "40x": {
+            "description": "When reply updation is failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Review"
+        ],
+        "description": "Delete reply in system",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The reply is deleted",
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "properties": {
+                        "reply": {
+                          "type": "string",
+                          "example": "reply"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "40x": {
+            "description": "When reply deletion is failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/review/{resId}": {
+      "parameters": [
+        {
+          "name": "resid",
+          "in": "path",
+          "required": true,
+          "description": "ID of the restaurant",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Review"
+        ],
+        "description": "List of all reviews",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page number, Default to Zero"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of reviews with page size of 50",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Reviews"
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "description": "Fetching failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Review"
+        ],
+        "description": "Create new review in system",
+        "parameters": [
+          {
+            "name": "review",
+            "in": "body",
+            "description": "Review that we want to create",
+            "schema": {
+              "properties": {
+                "comment": {
+                  "type": "string",
+                  "example": "comment"
+                },
+                "rating": {
+                  "type": "float",
+                  "example": 4.5
+                }
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "New review is created",
+            "schema": {
+              "$ref": "#/definitions/SuccessUserResponse"
+            }
+          },
+          "40x": {
+            "description": "When review creation is failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/review/unreplied": {
+      "get": {
+        "tags": [
+          "Review"
+        ],
+        "description": "List of unreplied review for manager only",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of reviews",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Reviews"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/review": {
+      "get": {
+        "tags": [
+          "Review"
+        ],
+        "description": "List of reviews applicable for users",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page number, Default to Zero",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of reviews",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Reviews"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/restaurant": {
+      "get": {
+        "tags": [
+          "Restaurant"
+        ],
+        "description": "List of all restaurants",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page number, Default to Zero",
+            "type": "integer"
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "DESC or ASC for rating, default to DSC",
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of restaurants with page size of 50",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Restaurant"
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "description": "Fetching failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Restaurant"
+        ],
+        "description": "Create new restaurant in system",
+        "parameters": [
+          {
+            "name": "restaurant",
+            "in": "body",
+            "description": "Restaurant that we want to create",
+            "schema": {
+              "properties": {
+                "rating": {
+                  "type": "string",
+                  "example": 4.5
+                },
+                "address": {
+                  "type": "string",
+                  "example": "address"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "restaurant name"
+                }
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "New restaurant is created",
+            "schema": {
+              "$ref": "#/definitions/SuccessUserResponse"
+            }
+          },
+          "40x": {
+            "description": "When restaurant creation is failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/restaurant/search": {
+      "parameters": [
+        {
+          "name": "rating",
+          "in": "body",
+          "description": "rating on the basis of which you want to search restaurants",
+          "schema": {
+            "properties": {
+              "name": {
+                "type": "string",
+                "example": "name"
+              },
+              "ids": {
+                "type": "array",
+                "example": "[1,2,3,4,5]"
+              },
+              "rating": {
+                "type": "array",
+                "example": "[3.4, 4.5, 4.5]"
+              }
+            }
+          }
+        }
+      ],
+      "post": {
+        "tags": [
+          "Restaurant"
+        ],
+        "summary": "Get restaurants with given ID",
+        "responses": {
+          "200": {
+            "description": "Restaurants are found",
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/Restaurant"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "description": "Restaurant is not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/restaurant/{restaurantId}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of restaurant",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Restaurant"
+        ],
+        "summary": "Get restaurant with given restaurant ID",
+        "responses": {
+          "200": {
+            "description": "Restaurant is found",
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/definitions/Restaurant"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "description": "Restaurant is not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update restaurant with a given ID",
+        "tags": [
+          "Restaurant"
+        ],
+        "parameters": [
+          {
+            "name": "restaurant",
+            "in": "body",
+            "description": "values that you want to update",
+            "schema": {
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "name"
+                },
+                "address": {
+                  "type": "string",
+                  "example": "address"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Restaurant is Updated",
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/definitions/Restaurant"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "description": "error in updating restaurant",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Restaurant"
+        ],
+        "summary": "Delete restaurant with given ID ( only admin and manager can )",
+        "responses": {
+          "200": {
+            "description": "Restaurant is Deleted",
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/definitions/Restaurant"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "description": "error in deleting restaurant",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "List of users",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page number, Default to Zero",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of user with page size of 50",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DetailedUser"
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "description": "Fetching failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/user/{userId}": {
+      "parameters": [
+        {
+          "name": "userId",
+          "in": "path",
+          "required": true,
+          "description": "ID of user that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get user with given ID",
+        "responses": {
+          "200": {
+            "description": "User is found",
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/definitions/DetailedUser"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "description": "User is not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update user with give ID",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/DetailedUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User is Updates",
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/definitions/DetailedUser"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Delete user with given ID ( only admin can )",
+        "responses": {
+          "200": {
+            "description": "User is Deleted",
+            "schema": {
+              "properties": {
+                "success": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/definitions/DetailedUser"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4xx": {
+            "description": "User is not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/user/logout": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Logout user",
+        "parameters": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Email verification sent",
+            "schema": {
+              "$ref": "#definitions/SuccessUserResponse"
+            }
+          },
+          "4xx": {
+            "description": "Verification Failed",
+            "schema": {
+              "$ref": "#definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/user/verify_email": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Verify the email",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "Email"
+          },
+          {
+            "name": "emailToken",
+            "in": "query",
+            "description": "Email Token sended via email"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Email verified",
+            "schema": {
+              "$ref": "#definitions/SuccessUserResponse"
+            }
+          },
+          "4xx": {
+            "description": "Verification Failed",
+            "schema": {
+              "$ref": "#definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/user/details": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Get details of logged in user",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "User details",
+            "schema": {
+              "$ref": "#definitions/DetailedUser"
+            }
+          },
+          "4xx": {
+            "description": "User not logged in",
+            "schema": {
+              "$ref": "#definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/user/email_confirmation": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Request server to send email for Verification",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "Email"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Email verification sent",
+            "schema": {
+              "$ref": "#definitions/SuccessUserResponse"
+            }
+          },
+          "4xx": {
+            "description": "Verification Failed",
+            "schema": {
+              "$ref": "#definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/user/password_reset": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Request for password reset Token to reset password",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "Email"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Email verified",
+            "schema": {
+              "$ref": "#definitions/SuccessUserResponse"
+            }
+          },
+          "4xx": {
+            "description": "Verification Failed",
+            "schema": {
+              "$ref": "#definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "definitions": "Reset the password",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "schema": {
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "arshad.admin@gmail.com",
+                  "description": "Enter your email"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "pass1234",
+                  "description": "new password"
+                },
+                "passwordToken": {
+                  "type": "string",
+                  "example": "12349583",
+                  "description": "Password reset token sent to your mail"
+                }
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Email verified",
+            "schema": {
+              "$ref": "#definitions/SuccessUserResponse"
+            }
+          },
+          "4xx": {
+            "description": "Verification Failed",
+            "schema": {
+              "$ref": "#definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Reviews": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "rating": {
+          "type": "float",
+          "example": 4.5
+        },
+        "comment": {
+          "type": "string",
+          "example": "comment"
+        },
+        "reply": {
+          "type": "string",
+          "example": "reply"
+        },
+        "dateOfVisit": {
+          "type": "string",
+          "example": "ISO Format date"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "ISO Format date"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "ISO Format date"
+        }
+      }
+    },
+    "Restaurant": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "rating": {
+          "type": "string",
+          "example": 4.5
+        },
+        "address": {
+          "type": "string",
+          "example": "address"
+        },
+        "name": {
+          "type": "string",
+          "example": "restaurant name"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "ISO Format date"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "ISO Format date"
+        }
+      }
+    },
+    "DetailedUser": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string",
+          "enum": [
+            "MALE",
+            "FEMALE",
+            "OTHER"
+          ]
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "ADMIN",
+            "MANAGER",
+            "USER"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "INACTIVE"
+          ]
+        },
+        "jwt": {
+          "type": "string",
+          "example": "kewopfjewopfjnewfnewofnewfinewoinewinfeowinfewoinfew",
+          "description": "Authentication token either setup in cookie or headers for authentication"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "ISO Format date"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "ISO Format date"
+        }
+      }
+    },
+    "SuccessResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "string"
+        }
+      }
+    },
+    "SuccessUserResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "description": "Success message"
+            }
+          }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

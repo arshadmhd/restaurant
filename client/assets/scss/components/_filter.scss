@@ -1,0 +1,79 @@
+@import "../../../node_modules/react-input-range/src/scss/index";
+
+.form-wrapper {
+  .filter-container {
+
+    background: $white;
+    padding: 10px;
+
+    .input-range {
+      margin: auto;
+      width: 80% !important;
+      height: 2rem !important;
+
+      .input-range__label--value {
+        top: -2.8rem !important;
+      }
+      .input-range__label {
+        font-size: 1.6rem;
+      }
+    }
+
+    .form_checkbox_row {
+      .form_item {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .form_row {
+
+      .form_item {
+
+        .form_label {
+          color: $black;
+          font-size: 1.4rem;
+          font-weight: 600;
+          margin-top: 0px;
+          padding-bottom: 20px;
+          padding-top: 30px;
+        }
+
+        .form_input {
+          input[type=text] {
+            width: 100%;
+            height: 2.429em;
+            background-color: #fff;
+            border: #ccc 1px solid;
+            border-radius: 4px;
+            padding-left: 15px;
+          }
+        }
+
+      }
+    }
+
+    .filter-button {
+      max-width: 300px;
+      margin: 30px auto 0 auto;
+      border-radius: 0px;
+    }
+  }
+}
+
+@media all and (min-width: 960px) {
+}
+
+@media all and (max-width: 959px) and (min-width: 600px) {
+
+}
+
+@media all and (max-width: 599px) and (min-width: 320px) {
+
+  .form-wrapper {
+
+    .filter-container {
+
+    }
+  }
+}

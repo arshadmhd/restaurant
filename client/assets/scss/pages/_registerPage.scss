@@ -1,0 +1,33 @@
+.resend-email-container {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  .resend-email {
+    color: #f5a637;
+    font-size: 1.4rem;
+
+    &:hover{
+      cursor: pointer;
+    }
+  }
+
+}
+
+
+.confirm_email_block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+
+
+
+  .confirm_email_check {
+    font-size: 2.2rem;
+  }
+
+  .proceed-to-link {
+
+  }
+}

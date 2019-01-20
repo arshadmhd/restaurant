@@ -1,0 +1,29 @@
+@import './config';
+
+// Base
+@import './base/normalize';
+@import './base/css_grid';
+@import './base/banner_scroller';
+@import './base/forms';
+@import './base/default';
+@import './base/common';
+
+// Components
+@import './components/header';
+@import './components/footer';
+@import './components/infoBlock';
+@import './components/titleInfo';
+@import 'components/restaurantCard';
+@import './components/filter';
+@import './components/reviewComponent';
+
+// Pages
+@import './pages/homePage';
+@import './pages/posts';
+@import './pages/servicesPage';
+@import './pages/aboutPage';
+@import 'pages/restaurantPage';
+@import 'pages/addRestaurantPage';
+@import 'pages/restaurantsPage';
+@import './pages/registerPage';
+@import './pages/userProfilePage';

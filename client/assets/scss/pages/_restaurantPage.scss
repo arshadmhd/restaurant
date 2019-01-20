@@ -1,0 +1,66 @@
+.green {
+  color: green !important;
+}
+
+.red {
+  color: red !important;
+}
+
+.restaurant-page {
+  margin-top: 10.0rem;
+  background: $white;
+  overflow: auto;
+  padding-bottom: 80px;
+
+
+  min-height: 80vh;
+  min-width: 100vw;
+  background: white;
+
+  .restaurant-image-page {
+    width: 25rem;
+  }
+
+  .right-align {
+    float: right;
+  }
+
+  .delete-restaurant {
+    background: $orange;
+    float: right;
+    padding: 10px 30px;
+    border-radius: 4px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.bottom-line-separator {
+  border-bottom: 2px solid $gray;
+  padding-bottom : 3rem;
+  padding-top: 3rem;
+}
+
+.amnIcons {
+  background-image: url(/assets/graphics/mapAmn5.1.png);
+  background-repeat: no-repeat;
+}
+
+
+.feature-wrapper {
+
+  .icon-container {
+
+    .feature-icon {
+      margin: 10px;
+      float: left;
+    }
+
+    .feature-name {
+      margin: 10px;
+      word-spacing: 0px;
+    }
+  }
+}

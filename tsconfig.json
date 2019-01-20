@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es2017",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "pretty": true,
+    "outDir": "dist",
+    "baseUrl": "./src",
+    "strict": false,
+    "paths": {
+      "*": [
+        "node_modules/*",
+        "src/types/*",
+        "src/*"
+      ]
+    },
+    "lib": [
+      "es2015",
+      "es6",
+      "es7",
+      "dom"
+    ],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "include": [
+    "src/**/*"
+  ]
+}

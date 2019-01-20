@@ -1,0 +1,46 @@
+.dark-text {
+  font-weight: 500;
+  color: $black;
+  font-size: 1.6rem;
+}
+
+.light-text {
+  font-weight: 500;
+  color: $gray;
+  font-size: 1.4rem;
+}
+
+
+
+@media all and (min-width: 960px) {
+  .title-container {
+    .title {
+      font-size: 2.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .location {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+
+    }
+
+    .price {
+      font-size: 2rem;
+    }
+
+    .area {
+      font-size: 2rem;
+      margin-left: 2rem;
+    }
+  }
+}
+
+
+@media all and (max-width: 959px) and (min-width: 600px) {
+
+}
+
+@media all and (max-width: 599px) and (min-width: 320px) {
+
+}
