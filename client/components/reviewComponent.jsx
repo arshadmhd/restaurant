@@ -29,7 +29,7 @@ class ReviewComponent extends Component {
         return (<div className='review-container card'>
             <div className='card-body container'>
                 <InfoBlock heading='' info={this.props.type} isBig={true} />
-                <RatingComponent onChange={this.onChange} readOnly={!canEdit} initialRating={rating}/>
+                <RatingComponent readOnly={!canEdit} initialRating={rating}/>
                 <InfoBlock heading="Rating" info={rating} />
 
                 <InfoBlock heading="Visiting date" info={Gen.getDateFromISODate(dateOfVisit)} />

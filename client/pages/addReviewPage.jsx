@@ -136,6 +136,9 @@ class AddReviewPage extends Component {
       if((pageType === 'Edit' && !reviewData)) {
           return null;
       }
+
+      const isCreatePage = pageType == 'Create';
+
       return (
           <section className="contactPage_wrap">
           {this.head()}
@@ -155,8 +158,8 @@ class AddReviewPage extends Component {
 
                                     <div className="form_wrap">
 
-                                        <div className="form_row">
-                                            <RatingComponent initialRating={rating} onChange={this.onChange.bind(this)} readOnly={!(isAdmin || this.getPageType()=='Create')}/>
+                                        <div className="">
+                                            <RatingComponent initialRating={rating} onChange={this.onChange.bind(this)} readOnly={!(isAdmin || isCreatePage)}/>
                                         </div>
 
                                         <div className="form_row">
@@ -167,7 +170,7 @@ class AddReviewPage extends Component {
                                                 placeholder={date && date.toDateString()}
                                                 time={false}
                                                 onChange={this.onDateChange.bind(this)}
-                                                disabled={!(isAdmin || this.getPageType()==='Create')}
+                                                disabled={!(isAdmin || isCreatePage)}
                                             />
                                         </div>
 
@@ -177,7 +180,7 @@ class AddReviewPage extends Component {
                                                 component={renderTextField}
                                                 label="Comment:"
                                                 placeholder="Comment"
-                                                disabled={!(isAdmin || this.getPageType()==='Create')}
+                                                disabled={!(isAdmin || isCreatePage)}
                                             />
                                         </div>
 

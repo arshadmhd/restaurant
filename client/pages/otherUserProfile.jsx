@@ -165,18 +165,6 @@ class OtherUserProfile extends Component {
                                                     data={ Gen.isUserAdmin(currentUser) ? ['active', 'inactive']: user ? [user.status] : [] }/>
                                             </div>
 
-                                            {
-                                                Gen.isUserManagerOrAdmin(user) ? '' :
-                                                    <div className="form_row">
-                                                        <Field
-                                                            name="managerId"
-                                                            type="number"
-                                                            component={renderTextField}
-                                                            label="Manager ID:"
-                                                        />
-                                                    </div>
-                                            }
-
                                             <div className="form_buttons">
                                                 <LaddaButton
                                                     type="submit"
