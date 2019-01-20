@@ -156,11 +156,11 @@ class AddReviewPage extends Component {
 
                                 </div>: <form className="add-review-container" onSubmit={handleSubmit(this.submit.bind(this))}>
 
-                                    <div className="form_wrap">
+                                    <div className="add-review-rating-container">
+                                        <RatingComponent initialRating={rating} onChange={this.onChange.bind(this)} readOnly={!(isAdmin || isCreatePage)}/>
+                                    </div>
 
-                                        <div className="">
-                                            <RatingComponent initialRating={rating} onChange={this.onChange.bind(this)} readOnly={!(isAdmin || isCreatePage)}/>
-                                        </div>
+                                    <div className="form_wrap">
 
                                         <div className="form_row">
                                             <DateTimePicker
