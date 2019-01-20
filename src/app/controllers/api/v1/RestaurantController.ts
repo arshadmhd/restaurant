@@ -4,7 +4,6 @@ import {
     CurrentUser,
     Delete,
     Get,
-    JsonController,
     OnUndefined,
     Param,
     Post,

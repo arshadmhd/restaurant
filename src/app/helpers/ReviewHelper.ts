@@ -9,7 +9,7 @@ const REVIEW_UPDATES = ['id', 'rating', 'comment', 'reply', 'dateOfVisit', 'crea
 
 export default class ReviewHelper {
 
-    static async createReview(currentUser: User, resId: number, params: any) {
+    static async createReview (currentUser: User, resId: number, params: any) {
         if (Permissions.canCreateReview(currentUser)) {
             const {rating, comment, dateOfVisit} = params;
             const existingReview: Review = await Review.findOne({where: {restaurantId: resId, userId: currentUser.id}});
@@ -35,12 +35,21 @@ export default class ReviewHelper {
         }
     }
 
-    static async updateReview(currentUser: User, resId: number, reviewId: number, params: any) {
+    static async updateReview (currentUser: User, resId: number, reviewId: number, params: any) {
         const review: Review = await Review.findOne({where: {id: reviewId}});
         if (Permissions.canUpdateReview(currentUser, review)) {
             try {
-                const {rating, comment, dateOfVisit} = params;
-                await Review.update({rating, comment, dateOfVisit}, {where: {id: reviewId}});
+                const {rating, comment, dateOfVisit, reply} = params;
+                if (currentUser.role === "MANAGER"){
+                    if (rating !== review.rating || comment !== review.comment || dateOfVisit !== review.dateOfVisit) {
+                        return new ReturnVal(false, "You can only reply", null);
+                    }
+                } else if (currentUser.role === "USER"){
+                    if (review.reply !== reply){
+                        return new ReturnVal(false, "You can't change reply", null);
+                    }
+                }
+                await Review.update({rating, comment, dateOfVisit, reply}, {where: {id: reviewId}});
                 return ReturnVal.create(true, config.MESSAGES.RESOURCE_UPDATED_SUCCESSFULLY, review);
             } catch (e) {
                 return ReturnVal.create(false, e.message || e.errors[0].message, null);
@@ -50,7 +59,7 @@ export default class ReviewHelper {
         }
     }
 
-    static async getReview(currentUser: User, resId: number, reviewId: number) {
+    static async getReview (currentUser: User, resId: number, reviewId: number) {
         const review: Review = await Review.findOne({where: {id: reviewId}});
         const restaurant: Restaurant = await Restaurant.findOne({where: {id: resId}});
 
@@ -66,7 +75,7 @@ export default class ReviewHelper {
 
     }
 
-    static async getAllReviewsOfManager(currentUser: User, resId?: number) {
+    static async getAllReviewsOfManager (currentUser: User, resId?: number) {
         let query = {};
         if (resId) {
             query = {restaurantId: resId};
@@ -86,7 +95,7 @@ export default class ReviewHelper {
 
     }
 
-    static async deleteReview(currentUser: User, resId: number, reviewId: number) {
+    static async deleteReview (currentUser: User, resId: number, reviewId: number) {
         const restaurent: Restaurant = await Restaurant.findOne({where: {id: resId}});
         const review: Review = await Review.findOne({where: {id: reviewId}});
         if (Permissions.canDeleteReview(currentUser, review)) {
@@ -101,7 +110,7 @@ export default class ReviewHelper {
         }
     }
 
-    static async updateReply(currentUser: User, resId: number, reviewId: number, params: any) {
+    static async updateReply (currentUser: User, resId: number, reviewId: number, params: any) {
         const restaurant: Restaurant = await Restaurant.findOne({where: {id: resId}});
         const review: Review = await Review.findOne({where: {id: reviewId}});
         if (Permissions.canModifyReply(currentUser, review, restaurant)) {
@@ -119,7 +128,7 @@ export default class ReviewHelper {
         }
     }
 
-    static async getAllUnRepliedReviews(currentUser: User) {
+    static async getAllUnRepliedReviews (currentUser: User) {
         if (currentUser.role === "MANAGER") {
             const reviews: Review[] = await Review.findAll({where: {reply: {[Op.in]: [null, ""]}}});
             const reviewsArr = Lodash.map(reviews, r => r.toJSON());
