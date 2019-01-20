@@ -136,7 +136,6 @@ class AddReviewPage extends Component {
       if((pageType === 'Edit' && !reviewData)) {
           return null;
       }
-
       return (
           <section className="contactPage_wrap">
           {this.head()}
@@ -157,7 +156,7 @@ class AddReviewPage extends Component {
                                     <div className="form_wrap">
 
                                         <div className="form_row">
-                                            <RatingComponent initialRating={rating} onChange={this.onChange.bind(this)} readOnly={!(isAdmin || this.getPageType()==='Create')}/>
+                                            <RatingComponent initialRating={rating} onChange={this.onChange.bind(this)} readOnly={!(isAdmin || this.getPageType()=='Create')}/>
                                         </div>
 
                                         <div className="form_row">
@@ -188,7 +187,7 @@ class AddReviewPage extends Component {
                                                 component={renderTextField}
                                                 label="Reply:"
                                                 placeholder="Reply"
-                                                disabled={!(isAdmin || this.getPageType()==='Create' || isOwner)}
+                                                disabled={!(isAdmin || isOwner)}
                                                 // TODO:This check means that owner can further edit
                                             />
                                         </div>
