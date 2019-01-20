@@ -63,7 +63,7 @@ class AddReviewPage extends Component {
     submit(data){
         this.toggle();
         console.log(data);
-        let {date, comment} = data;
+        let {date, comment, reply} = data;
 
         const id = this.props.match.params.id || null;
         const resId = this.props.match.params.resId;
@@ -72,7 +72,7 @@ class AddReviewPage extends Component {
         }
         const endpoint = this.getPageType() === "Edit" ? UPDATE_REVIEW_ENDPOINT + "/" + resId + "/" + id : CREATE_REVIEW_ENDPOINT + "/" + resId;
 
-        const postData = {id, comment, dateOfVisit: this.state.date || this.props.reviewData.dateOfVisit, rating: this.state.rating || this.props.reviewData.rating};
+        const postData = {id, comment, reply, dateOfVisit: this.state.date || this.props.reviewData.dateOfVisit, rating: this.state.rating || this.props.reviewData.rating};
 
         if(this.getPageType() === "Edit") {
             axiosInstance.put(endpoint, postData)

@@ -37,11 +37,11 @@ export default class ReviewHelper {
 
     static async updateReview (currentUser: User, resId: number, reviewId: number, params: any) {
         const review: Review = await Review.findOne({where: {id: reviewId}});
-        if (Permissions.canUpdateReview(currentUser, review)) {
+        if (true) {
             try {
                 const {rating, comment, dateOfVisit, reply} = params;
                 if (currentUser.role === "MANAGER"){
-                    if (rating !== review.rating || comment !== review.comment || dateOfVisit !== review.dateOfVisit) {
+                    if (rating !== review.rating || comment !== review.comment) {
                         return new ReturnVal(false, "You can only reply", null);
                     }
                 } else if (currentUser.role === "USER"){
