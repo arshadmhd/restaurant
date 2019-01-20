@@ -84,6 +84,13 @@ class Header extends Component {
                                 {
                                     Gen.isUserManager(user) ?
                                         <li>
+                                            <NavLink activeClassName="active" to="/reviews/pending">Pending reviews</NavLink>
+                                        </li>: ''
+                                }
+
+                                {
+                                    Gen.isUserManager(user) ?
+                                        <li>
                                             <NavLink activeClassName="active" to="/restaurant/add">Add Restaurant</NavLink>
                                         </li>: ''
                                 }

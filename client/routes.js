@@ -5,6 +5,7 @@ import LoginPage from './pages/loginPage';
 import ResetPasswordPage from './pages/resetPasswordPage';
 import Restaurant from './pages/restaurantPage';
 import AddReview from './pages/addReviewPage';
+import ReviewsPage from './pages/reviewsPage';
 import AddRestaurant from './pages/addRestaurantPage';
 import Restaurants from './pages/restaurantsPage';
 import Users from './pages/usersPage';
@@ -45,6 +46,16 @@ export default [
             {
                 path: '/review/:resId/edit/:id',
                 ...AddReview
+            },
+        ]
+    },
+    {
+        path: '/reviews',
+        ...App,
+        routes: [
+            {
+                path: '/reviews/pending',
+                ...ReviewsPage
             },
         ]
     },

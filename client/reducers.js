@@ -38,6 +38,17 @@ const restaurantReducer = function(state = null, action){
     }
 };
 
+const reviewsReducer = function(state = null, action){
+    switch(action.type){
+        case 'FETCH_REVIEWS':
+            return action.payload || false;
+        case 'CLEAR_REVIEWS':
+            return null;
+        default:
+            return state;
+    }
+};
+
 const reviewReducer = function(state = null, action){
 
     switch(action.type){
@@ -102,6 +113,7 @@ export default combineReducers({
     form: formReducer,
     restaurant: restaurantReducer,
     review: reviewReducer,
+    reviews: reviewsReducer,
     restaurants: restaurantsReducer,
     user: userReducer,
     otherUser: otherUserReducer,

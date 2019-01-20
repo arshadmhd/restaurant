@@ -1,6 +1,7 @@
 const config = require('../webConfig.json');
 
 export const GET_REVIEW_ENDPOINT = config.axiosInstance_baseURL+'/api/v1/review';
+export const GET_REVIEWS_ENDPOINT = config.axiosInstance_baseURL+'/api/v1/review/unreplied';
 export const CREATE_REVIEW_ENDPOINT = config.axiosInstance_baseURL+'/api/v1/review';
 export const UPDATE_REVIEW_ENDPOINT = config.axiosInstance_baseURL+'/api/v1/review';
 export const DELETE_REVIEW_ENDPOINT = config.axiosInstance_baseURL+'/api/v1/review';
