@@ -130,8 +130,11 @@ export default class ReviewHelper {
 
     static async getAllUnRepliedReviews (currentUser: User) {
         if (currentUser.role === "MANAGER") {
-            const reviews: Review[] = await Review.findAll({where: {reply: {[Op.in]: [null, ""]}}});
-            const reviewsArr = Lodash.map(reviews, r => r.toJSON());
+            const restaurants: Restaurant[] = await Restaurant.findAll({where: {userId: currentUser.id}});
+            const resIds = Lodash.map(restaurants, r => r.id);
+            const reviews: Review[] = await Review.findAll({where: {restaurantId: {[Op.in]: resIds}}});
+            const unreplied: Review[] = Lodash.filter(reviews, r => !r.reply );
+            const reviewsArr = Lodash.map(unreplied,  r => r.toJSON());
             return new ReturnVal(true, "", reviewsArr);
         } else {
             return new ReturnVal(false, config.MESSAGES.UNAUTHORIZED_ACCESS, null);

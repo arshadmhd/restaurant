@@ -28,7 +28,10 @@ class ReviewComponent extends Component {
         const canEdit = false; // check if the userId is same as current user id
         return (<div className='review-container card'>
             <div className='card-body container'>
-                <InfoBlock heading='' info={this.props.type} isBig={true} />
+                {
+                    this.props.type ?
+                        <InfoBlock heading='' info={this.props.type} isBig={true} />:''
+                }
                 <RatingComponent readOnly={!canEdit} initialRating={rating}/>
                 <InfoBlock heading="Rating" info={rating} />
 
@@ -60,7 +63,7 @@ class ReviewComponent extends Component {
 
 ReviewComponent.proptypes = {
     review: PropTypes.object.isRequired,
-    type: PropTypes.string.isRequired,
+    type: PropTypes.string,
     isOwner: PropTypes.bool.isRequired,
     isAdmin: PropTypes.bool.isRequired,
     fetchRestaurantAction: PropTypes.func.isRequired,

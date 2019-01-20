@@ -7,6 +7,7 @@ import {fetchReviewsAction} from '../actions';
 import {Helmet} from 'react-helmet';
 import _ from 'underscore';
 import ReviewComponent from "../components/reviewComponent";
+import {Gen} from "../helpers/gen";
 
 class Reviews extends Component {
 
@@ -15,20 +16,17 @@ class Reviews extends Component {
     }
 
     renderReviews() {
-        if (_.isEmpty(this.props.reviews)) {
-            const reviewsData = this.props.reviews.map((review, index) => {
-                return (
-                    <div key={index} className="restaurant">
-                        <ReviewComponent review={review}/>
-                    </div>
-                );
-            });
-
-            return (<div>
-                    {reviewsData}
+        const reviewsData = this.props.reviews.map((review, index) => {
+            return (
+                <div key={index} className="reviews-box-container">
+                    <ReviewComponent fetchRestaurantAction={() =>{}} isOwner={true} isAdmin={Gen.isUserAdmin(this.props.user)} review={review}/>
                 </div>
             );
-        }
+        });
+        return (<div>
+                {reviewsData}
+            </div>
+        );
     }
 
     head(){
@@ -49,7 +47,6 @@ class Reviews extends Component {
                     <ReactCSSTransitionGroup transitionName="anim" transitionAppear={true}  transitionAppearTimeout={5000} transitionEnter={false} transitionLeave={false}>
                     <div className="main anim-appear">
                         <Grid className="restaurants">
-
                             <Row>
                                 {
                                     (reviews.length > 0) ? this.renderReviews()
