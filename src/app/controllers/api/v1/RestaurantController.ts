@@ -17,7 +17,6 @@ import GenUtil from "../../../helpers/GenUtil";
 import UrlEncodeJson from "urlcode-json";
 const UNDEFINED = undefined;
 @Controller("/api/v1/restaurant")
-@OnUndefined(401)
 class RestaurantController {
 
     @Post("/search")
@@ -46,8 +45,8 @@ class RestaurantController {
     @Authorized()
     async getRestaurant (@Param("id") restaurantId: number, @CurrentUser() currentUser: User, @Req() req: Request, @Res() res: Response, next: NextFunction) {
         const retVal = await RestaurantHelper.getRestaurant(currentUser, req.params.id);
-        GenUtil.sendJsonResponse(res, retVal.success? 200: 400, retVal.message, retVal.returnVal);
-        return UNDEFINED;
+        return GenUtil.sendJsonResponse(res, retVal.success? 200: 400, retVal.message, retVal.returnVal);
+        // return UNDEFINED;
     }
 
     @Delete("/:id")

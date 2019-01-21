@@ -7,7 +7,7 @@ import Lodash from "lodash";
 module.exports = {
     up: async (queryInterface, Sequelize) => {
         const users: User[] = await User.findAll({where: {role: "MANAGER"}});
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 30; i++) {
             const user = Lodash.sample(users);
             await RestaurantFactory.generate({user});
         }

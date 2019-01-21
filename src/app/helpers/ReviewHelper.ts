@@ -5,7 +5,7 @@ import ReturnVal from "./ReturnVal";
 import Lodash from "lodash";
 import {Op} from "sequelize";
 
-const REVIEW_UPDATES = ['id', 'rating', 'comment', 'reply', 'dateOfVisit', 'createdAt'];
+const REVIEW_UPDATES = ['id', 'rating', 'comment', 'reply', 'dateOfVisit', 'createdAt', 'userId', 'restaurantId'];
 
 export default class ReviewHelper {
 
@@ -72,7 +72,6 @@ export default class ReviewHelper {
         } else {
             return new ReturnVal(false, config.MESSAGES.UNAUTHORIZED_ACCESS);
         }
-
     }
 
     static async getAllReviewsOfManager (currentUser: User, resId?: number) {
@@ -83,16 +82,14 @@ export default class ReviewHelper {
             query = {};
         } else if (currentUser.role === "MANAGER") {
             const restaurants: Restaurant[] = await Restaurant.findAll({where: {userId: currentUser.id}});
-            const resids = Lodash.map(restaurants, (res: Restaurant) => res.id);
-            const reviews = {restaurantId: {[Op.in]: resids}};
+            const resIds = Lodash.map(restaurants, (res: Restaurant) => res.id);
+            query = {restaurantId: {[Op.in]: resIds}};
         }
-        const review: Review[] = await Review.findAll({
+        const reviews: Review[] = await Review.findAll({
             where: query,
             attributes: REVIEW_UPDATES
         });
-
-        return ReturnVal.create(true, "", review);
-
+        return ReturnVal.create(true, "", reviews);
     }
 
     static async deleteReview (currentUser: User, resId: number, reviewId: number) {
