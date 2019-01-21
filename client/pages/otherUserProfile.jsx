@@ -162,7 +162,7 @@ class OtherUserProfile extends Component {
                                                     name="status"
                                                     component={renderDropdownList}
                                                     label="Status:"
-                                                    data={ Gen.isUserAdmin(currentUser) ? ['active', 'inactive']: user ? [user.status] : [] }/>
+                                                    data={ Gen.isUserAdmin(currentUser) ? ['ACTIVE', 'INACTIVE']: user ? [user.status] : [] }/>
                                             </div>
 
                                             <div className="form_buttons">

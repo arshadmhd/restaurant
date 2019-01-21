@@ -10,6 +10,7 @@ import {Restaurant, User} from "../../db/models";
 import Notifier from "./Notifier";
 import Permissions from "./Permissions";
 import ReturnVal from "./ReturnVal";
+import {Not} from "sequelize-typescript";
 
 const USER_DETAILS_FIELDS = ["role", "status", "gender", "name", "email", "id", "createdAt", "updatedAt"];
 const SELF_UPDATE_ALLOWED_FIELDS = ["sex", "name", "email"];
@@ -58,6 +59,7 @@ export default class UserHelper {
                 verified: false
             };
             await user.save();
+            await Notifier.notifyEmailConfirmation(user);
             return new ReturnVal(true, config.MESSAGES.SIGNUP_SUCCESSFUL_MESSAGE, Lodash.pick(user.toJSON(), USER_DETAILS_FIELDS));
         } catch (e) {
             console.log(e);
@@ -122,6 +124,7 @@ export default class UserHelper {
         };
 
         await user.save();
+        await Notifier.notifyEmailConfirmation(user);
         return new ReturnVal(true, config.MESSAGES.SUCCESSFULLY_RESEND_CONFIRMATION_MAIL, user);
     }
 
@@ -137,6 +140,7 @@ export default class UserHelper {
             token: (Math.floor(Math.random() * 10000000) + 1000000) + "",
         };
         await user.save();
+        await Notifier.notifyPasswordReset(user);
         return new ReturnVal(true, config.MESSAGES.SUCCESSFULLY_PASSWORD_TOKEN_SENT, user);
     }
 

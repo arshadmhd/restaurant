@@ -49,7 +49,8 @@ export default class ReviewHelper {
                         return new ReturnVal(false, "You can't change reply", null);
                     }
                 }
-                await Review.update({rating, comment, dateOfVisit, reply}, {where: {id: reviewId}});
+                Object.assign(review, review, {rating, comment, dateOfVisit, reply});
+                await review.save();
                 return ReturnVal.create(true, config.MESSAGES.RESOURCE_UPDATED_SUCCESSFULLY, review);
             } catch (e) {
                 return ReturnVal.create(false, e.message || e.errors[0].message, null);

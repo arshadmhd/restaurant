@@ -28,7 +28,7 @@ class UserCard extends Component {
                     <div className="restaurant-class">
                         {`role: ${role} `}
                     </div>
-                    <div className={`${status === 'active' ? 'green' : 'red'} restaurant-class`}>
+                    <div className={`${status === 'ACTIVE' ? 'green' : 'red'} restaurant-class`}>
                         {`status: ${status} `}
                     </div>
 

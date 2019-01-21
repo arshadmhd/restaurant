@@ -6,7 +6,7 @@
   "scripts": {
     "build-ts": "rm -rf dist && tsc",
     "start": "npm run serve",
-    "serve": "node dist/server.js",
+    "serve": "node dist/Server.js 2> /dev/null",
     "watch-node": "nodemon dist/server.js",
     "watch-ts": "rm -rf dist && mkdir dist && mkdir dist/views && cp -r src/views/* dist/views/ && tsc -w",
     "fix-lint": "./node_modules/.bin/tslint --fix -c ./tslint.json './src/**/*.ts'",

@@ -207,7 +207,7 @@ class AddReviewPage extends Component {
                                                 data-spinner-color="#ddd"
                                                 data-spinner-lines={12}
                                             >
-                                                {pageType} review
+                                                Save
                                             </LaddaButton>
                                         </div>
                                     </div>

@@ -137,7 +137,7 @@ class UserProfile extends Component {
                                                         name="status"
                                                         component={renderDropdownList}
                                                         label="Status:"
-                                                        data={['active', 'inactive']}/>
+                                                        data={['ACTIVE', 'INACTIVE']}/>
                                                 </div> : ''
                                             }
 
