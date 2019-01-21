@@ -1,6 +1,14 @@
 import {
-    GET_RESTAURANT_ENDPOINT, GET_RESTAURANTS_ENDPOINT, SIGN_UP_ENDPOINT_POST, GET_USER_DETAILS,
-    LOGOUT_USER, GET_OTHER_USER_DETAILS, GET_USERS_ENDPOINT, GET_REVIEW_ENDPOINT, GET_REVIEWS_ENDPOINT
+    GET_RESTAURANT_ENDPOINT,
+    GET_RESTAURANTS_ENDPOINT,
+    SIGN_UP_ENDPOINT_POST,
+    GET_USER_DETAILS,
+    LOGOUT_USER,
+    GET_OTHER_USER_DETAILS,
+    GET_USERS_ENDPOINT,
+    GET_REVIEW_ENDPOINT,
+    GET_REVIEWS_ENDPOINT,
+    GET_REVIEWS_UNREPLIED_ENDPOINT
 } from './endpoints';
 import {actions} from './constants';
 
@@ -76,9 +84,10 @@ export const fetchRestaurantAction = (productID) => async (dispatch, getState, a
 };
 
 
-export const fetchReviewsAction = () => async (dispatch, getState, api) => {
+export const fetchReviewsAction = (resId) => async (dispatch, getState, api) => {
 
-    await api.get(GET_REVIEWS_ENDPOINT).then(response => {
+    const url = resId ? GET_REVIEW_ENDPOINT + '/' + resId : GET_REVIEWS_UNREPLIED_ENDPOINT;
+    await api.get(url).then(response => {
         console.log(response);
         dispatch({
             type: 'FETCH_REVIEWS',

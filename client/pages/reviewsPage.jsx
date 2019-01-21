@@ -12,7 +12,8 @@ import {Gen} from "../helpers/gen";
 class Reviews extends Component {
 
     componentDidMount(){
-        this.props.fetchReviewsAction();
+        const resId = this.props.match.params.resId;
+        this.props.fetchReviewsAction(resId);
     }
 
     renderReviews() {
@@ -32,7 +33,7 @@ class Reviews extends Component {
     head(){
         return (
             <Helmet bodyAttributes={{class: "postsPage"}}>
-                <title>{`Pending reviews Page`}</title>
+                <title>{`Reviews Page`}</title>
             </Helmet>
         );
     }

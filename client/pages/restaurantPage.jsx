@@ -111,6 +111,15 @@ class Restaurant extends Component {
                                                 <img alt="restaurant icon" className="restaurant-image-page" src={'/assets/graphics/restauranticon.png'} />
                                             </Col>
                                         </Row>
+
+                                        {
+                                            isOwner || isAdmin ? <Row>
+                                                <Col xs={6}>
+                                                    <Link to={`/reviews/${id}`} >See All Reviews </Link>
+                                                </Col>
+                                            </Row> : ''
+                                        }
+
                                     </Grid>
                                     {
                                         !_.isEmpty(userReview) ?

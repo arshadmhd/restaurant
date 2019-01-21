@@ -57,6 +57,10 @@ export default [
                 path: '/reviews/pending',
                 ...ReviewsPage
             },
+            {
+                path: '/reviews/:resId',
+                ...ReviewsPage
+            }
         ]
     },
     {
